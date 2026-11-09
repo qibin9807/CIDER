@@ -1,0 +1,24 @@
+{
+  "seed": 0,
+  "batch_size": 16,
+  "device": "cpu",
+  "torch_threads": 1,
+  "task": {
+    "hidden_dim": 32,
+    "embedding_dim": 16,
+    "num_layers": 2,
+    "pred_hidden_dims": [16],
+    "learning_rate": 0.003,
+    "epochs": 20
+  },
+  "cider": {
+    "hidden_channels": 32,
+    "latent_channels": 16,
+    "encoder_layers": 2,
+    "decoder_channels": 32,
+    "dropout": 0.0,
+    "learning_rate": 0.001,
+    "epochs": 10,
+    "validation_interval": 5
+  }
+}

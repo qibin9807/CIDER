@@ -1,0 +1,4 @@
+interface:
+  display_name: "CIDER 生物数据分析"
+  short_description: "Prepare biological graphs and tune teacher-free CIDER"
+  default_prompt: "Use $cider-bio to prepare my h5ad data, build a training-only gene correlation network, and select CIDER parameters on validation data."
