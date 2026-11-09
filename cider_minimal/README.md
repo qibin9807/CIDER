@@ -1,8 +1,8 @@
 # CIDER research code
 
-This source bundle contains the formal teacher-free recursive CIDER model,
-selected NCI1 and Mutagenicity weights, and a separate supervised BA-2Motif
-reference. Run the Python files directly from this directory.
+This source bundle contains recursive CIDER, selected NCI1 and Mutagenicity
+weights, and a separate supervised BA-2Motif reference. Run the Python files
+directly from this directory.
 
 ## Environment
 
@@ -10,14 +10,12 @@ reference. Run the Python files directly from this directory.
 pip install -r requirements.txt
 ```
 
-Checked with Python 3.12.13, PyTorch 2.7.1+cu128, and PyG 2.6.1. Archived metrics
+Checked with Python 3.12.13, PyTorch 2.7.1+cu128, and PyG 2.6.1. Saved metrics
 were evaluated on CPU with eight PyTorch threads. Reuse the same versions and
 device when comparing numerical results.
 
-The compact model was checked against the main implementation: all cleaned
-validation graph outputs, recursive edge selections, training losses, gradients,
-and an optimizer epoch matched exactly in the same environment. Recomputing
-both reported splits with the bundled weights also matched the archived metrics.
+Recomputing the reported validation and test splits with the bundled weights
+reproduces the saved metrics in this environment.
 
 ## Show or recompute results
 
@@ -38,12 +36,12 @@ Recomputation defaults to CPU, batch size 128, and eight PyTorch threads;
 
 | Experiment | Model | Selected seed / epoch | Validation / test graphs | Test mean fidelity |
 | --- | --- | --- | --- | ---: |
-| `nci1` | Teacher-free recursive CIDER | 1 / 20 | 486 / 485 | 87.40% |
-| `mutag` | Teacher-free recursive CIDER | 0 / 10 | 500 / 500 | 92.47% |
+| `nci1` | Recursive CIDER | 1 / 20 | 486 / 485 | 87.40% |
+| `mutag` | Recursive CIDER | 0 / 10 | 500 / 500 | 92.47% |
 | `ba2` | Supervised topology reference | 0 / 60 | 100 / 100 | Separate reference |
 
 NCI1 evaluation removes cross-split attributed-graph isomorphisms, without
-using labels, to match the archived results. `mutag` denotes the 4,337-graph
+using labels, to match the reported results. `mutag` denotes the 4,337-graph
 Mutagenicity dataset. BA-2Motif uses known motif-edge labels during training;
 its 100% test accuracy is a dataset-specific supervised reference.
 
@@ -66,16 +64,15 @@ non-causal edge distributions, and removes the highest non-causal edge pairs.
 The retained graphs are nested from 90% down to 10%. For `E` undirected pairs,
 retention `r` keeps `max(1, ceil(r * E))` pairs; reverse directions stay together.
 
-No offline teacher stages, teacher forcing, or edge pseudo-label supervision
-are used by the recursive model. The frozen task classifier supplies training
-feedback through fidelity, distillation, margin, step consistency, and online
-same-budget counterfactual comparisons. With an explicit target class,
+The frozen task classifier supplies training feedback through fidelity,
+distillation, margin, step consistency, and online same-budget counterfactual
+comparisons. With an explicit target class,
 `explain_graph` makes no classifier calls during recursive deletion. Without a
 target, one full-graph classifier call chooses the class before deletion.
 
 The selected models use hidden widths 64 for NCI1 and 32 for Mutagenicity,
-latent width 16, two encoder layers, decoder width 64, zero task-node context,
-and no dropout. Training uses 30 epochs, batch size 128, Adam learning rate
+latent width 16, two encoder layers, decoder width 64, and no dropout.
+Training uses 30 epochs, batch size 128, Adam learning rate
 1e-3, validation every five epochs, ranking temperature 1, soft-mask
 temperature 0.2, sparse-stage focus 2, and one online alternative per round.
 Loss weights are:
@@ -99,11 +96,11 @@ python example.py
 
 The default creates independent synthetic splits (32 training, eight validation,
 eight test graphs) and runs task-classifier training, validation selection,
-teacher-free CIDER training, checkpoint reload, test evaluation, and single-graph
-explanation. It uses CPU, seed 0, 20 task epochs at learning rate 0.01, five CIDER
+CIDER training, checkpoint reload, test evaluation, and single-graph explanation.
+It uses CPU, seed 0, 20 task epochs at learning rate 0.01, five CIDER
 epochs, batch size 16, validation every five CIDER epochs, and one PyTorch thread.
 The generated data demonstrate the API; use
-`show_results.py --recompute` for the paper's benchmark results.
+`show_results.py --recompute` for the reported benchmark results.
 
 The example writes the following files to `example_output/`:
 

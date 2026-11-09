@@ -1,14 +1,15 @@
 ---
 name: cider-bio
-description: Prepare h5ad or gene-expression tables, construct training-only gene correlation networks, and tune teacher-free CIDER to explain phenotype or cell-class predictions. Use for agent-led CIDER biological-data workflows, parameter selection, and gene-edge interpretation; not for generic differential expression or estimating biological intervention effects from correlations alone.
+description: Prepare h5ad or gene-expression tables, construct training-only gene correlation networks, and tune CIDER to explain phenotype or cell-class predictions. Use for agent-led CIDER biological-data workflows, parameter selection, and gene-edge interpretation; not for generic differential expression or estimating biological intervention effects from correlations alone.
 ---
 
 # CIDER for biological expression data
 
 Turn biological expression data into a reproducible, validation-selected CIDER
 analysis. Choose preprocessing and hyperparameters on the user's behalf. Use the
-bundled teacher-free model in `assets/cider/cider.py`; it is the same core as the
-formal research bundle. Do not substitute the archived teacher-supervised model.
+bundled recursive CIDER model in `assets/cider/cider.py`. It estimates causal and
+non-causal edge distributions, removes a small subset, and re-encodes the residual
+at each stage.
 
 ## Establish the biological task
 
@@ -64,9 +65,9 @@ small, recorded validation trials. The runner does not evaluate test data.
    Network/feature alternatives belong to this stage. Fidelity cannot rescue a
    poor classifier; do not spend the CIDER search on a collapsed predictor.
 3. Freeze the selected candidate graph and critic. Reuse it with `--task-run`
-   while comparing CIDER settings. Keep the official teacher-free objective;
-   adjust widths, learning rate, regularization or online-comparison settings
-   through trial configs, not through external edge pseudo-labels.
+   while comparing CIDER settings. Use CIDER's prediction and distribution losses;
+   adjust widths, learning rate, regularization, or online counterfactual
+   comparisons through trial configs.
 4. Select CIDER on `0.7 * mean fidelity + 0.3 * 10%-30% fidelity`, reporting label
    accuracy separately. If a user chooses another validation objective, record
    it explicitly rather than silently changing the method.
@@ -76,8 +77,8 @@ small, recorded validation trials. The runner does not evaluate test data.
 
 Do not overwrite different trials into one directory. Preserve configs,
 validation metrics, selected states, seeds, input/network hashes, environment,
-and gene mappings. New-data results are not the archived NCI1/Mutagenicity
-benchmark; the synthetic demo is an interface check only.
+and gene mappings. Report new-data results with their dataset and split design;
+use the synthetic demo for interface checks.
 
 ## Explain and hand off
 

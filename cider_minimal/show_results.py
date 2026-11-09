@@ -89,11 +89,7 @@ def main():
 
     print(
         "Results: "
-        + (
-            "recomputed from graph data"
-            if args.recompute
-            else "archived in results.json"
-        )
+        + ("recomputed from graph data" if args.recompute else "saved in results.json")
     )
     for name in selected:
         for split in splits:

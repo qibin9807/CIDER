@@ -289,7 +289,6 @@ def main():
                         "validation": metrics,
                         "selection": summary,
                         "task_validation": task_metrics,
-                        "teacher_free": True,
                     },
                     args.output_dir / "selected.pt",
                 )
@@ -308,7 +307,6 @@ def main():
             "best_cider_epoch": best_epoch,
             "selection": selection_summary(best_metrics),
             "task_run": str(args.task_run) if args.task_run is not None else None,
-            "teacher_free": True,
             "majority_baseline": majority_baseline,
         },
     )

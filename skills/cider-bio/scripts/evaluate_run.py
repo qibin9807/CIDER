@@ -101,7 +101,6 @@ def main():
         "cider": metrics,
         "summary": selection_summary(metrics),
         "best_epoch": checkpoint["best_epoch"],
-        "teacher_free": True,
         "classes": metadata["classes"],
     }
     args.output_dir.mkdir(parents=True, exist_ok=True)

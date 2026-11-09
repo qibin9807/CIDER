@@ -1,7 +1,7 @@
 {
   "nci1": {
     "title": "NCI1",
-    "model": "Teacher-free recursive CIDER",
+    "model": "Recursive CIDER",
     "checkpoint": "params/nci1/best.pt",
     "task_checkpoint": "params/nci1/task_model.pt",
     "seed": 1,
@@ -11,7 +11,6 @@
       "latent_channels": 16,
       "encoder_layers": 2,
       "decoder_channels": 64,
-      "task_context_channels": 0,
       "dropout": 0
     },
     "loss_weights": {
@@ -20,22 +19,18 @@
       "margin": 0.25,
       "step_consistency": 0.5,
       "counterfactual": 1,
-      "non_causal": 0,
       "kl": 0.00001,
       "independence": 0.01,
       "invariance": 0.01,
-      "entropy": 0.001,
-      "teacher": 0
+      "entropy": 0.001
     },
     "training_config": {
       "batch_size": 128,
       "learning_rate": 0.001,
       "ranking_temperature": 1,
-      "teacher_forcing_ratio": 0,
       "mask_temperature": 0.2,
       "sparse_focus": 2,
       "counterfactual_samples": 1,
-      "sample_latent": false,
       "supervision": "online_task_critic",
       "edge_policy_inputs": "cider_state_and_target"
     },
@@ -66,56 +61,47 @@
         "0.1": {
           "fidelity": 0.7489711934156379,
           "accuracy": 0.6460905349794238,
-          "retained_ratio": 0.11609312928753135,
-          "pre_refinement_fidelity": 0.7489711934156379
+          "retained_ratio": 0.11609312928753135
         },
         "0.2": {
           "fidelity": 0.8662551440329218,
           "accuracy": 0.7057613168724279,
-          "retained_ratio": 0.21476781711656862,
-          "pre_refinement_fidelity": 0.8662551440329218
+          "retained_ratio": 0.21476781711656862
         },
         "0.3": {
           "fidelity": 0.9259259259259259,
           "accuracy": 0.7283950617283951,
-          "retained_ratio": 0.3166068198749558,
-          "pre_refinement_fidelity": 0.9259259259259259
+          "retained_ratio": 0.3166068198749558
         },
         "0.4": {
           "fidelity": 0.9259259259259259,
           "accuracy": 0.7242798353909465,
-          "retained_ratio": 0.41501834853686426,
-          "pre_refinement_fidelity": 0.9259259259259259
+          "retained_ratio": 0.41501834853686426
         },
         "0.5": {
           "fidelity": 0.9423868312757202,
           "accuracy": 0.7366255144032922,
-          "retained_ratio": 0.5090999838746624,
-          "pre_refinement_fidelity": 0.9423868312757202
+          "retained_ratio": 0.5090999838746624
         },
         "0.6": {
           "fidelity": 0.934156378600823,
           "accuracy": 0.7325102880658436,
-          "retained_ratio": 0.6142490606739688,
-          "pre_refinement_fidelity": 0.934156378600823
+          "retained_ratio": 0.6142490606739688
         },
         "0.7": {
           "fidelity": 0.9382716049382716,
           "accuracy": 0.7366255144032922,
-          "retained_ratio": 0.7164603025334362,
-          "pre_refinement_fidelity": 0.9382716049382716
+          "retained_ratio": 0.7164603025334362
         },
         "0.8": {
           "fidelity": 0.9300411522633745,
           "accuracy": 0.7366255144032922,
-          "retained_ratio": 0.8144995606975791,
-          "pre_refinement_fidelity": 0.9300411522633745
+          "retained_ratio": 0.8144995606975791
         },
         "0.9": {
           "fidelity": 0.9218106995884774,
           "accuracy": 0.7530864197530864,
-          "retained_ratio": 0.9169739931208607,
-          "pre_refinement_fidelity": 0.9218106995884774
+          "retained_ratio": 0.9169739931208607
         }
       },
       "summary": {
@@ -135,56 +121,47 @@
         "0.1": {
           "fidelity": 0.7587628865979381,
           "accuracy": 0.6247422680412371,
-          "retained_ratio": 0.11664519949057668,
-          "pre_refinement_fidelity": 0.7587628865979381
+          "retained_ratio": 0.11664519949057668
         },
         "0.2": {
           "fidelity": 0.8288659793814434,
           "accuracy": 0.6494845360824743,
-          "retained_ratio": 0.21503500790940117,
-          "pre_refinement_fidelity": 0.8288659793814434
+          "retained_ratio": 0.21503500790940117
         },
         "0.3": {
           "fidelity": 0.8474226804123711,
           "accuracy": 0.6597938144329897,
-          "retained_ratio": 0.3172853961433332,
-          "pre_refinement_fidelity": 0.8474226804123711
+          "retained_ratio": 0.3172853961433332
         },
         "0.4": {
           "fidelity": 0.8907216494845361,
           "accuracy": 0.6824742268041237,
-          "retained_ratio": 0.41460309372734777,
-          "pre_refinement_fidelity": 0.8907216494845361
+          "retained_ratio": 0.41460309372734777
         },
         "0.5": {
           "fidelity": 0.8989690721649485,
           "accuracy": 0.6948453608247422,
-          "retained_ratio": 0.5089512539893082,
-          "pre_refinement_fidelity": 0.8989690721649485
+          "retained_ratio": 0.5089512539893082
         },
         "0.6": {
           "fidelity": 0.9154639175257732,
           "accuracy": 0.7072164948453609,
-          "retained_ratio": 0.6152209173772752,
-          "pre_refinement_fidelity": 0.9154639175257732
+          "retained_ratio": 0.6152209173772752
         },
         "0.7": {
           "fidelity": 0.931958762886598,
           "accuracy": 0.7195876288659794,
-          "retained_ratio": 0.716070682486308,
-          "pre_refinement_fidelity": 0.931958762886598
+          "retained_ratio": 0.716070682486308
         },
         "0.8": {
           "fidelity": 0.911340206185567,
           "accuracy": 0.7195876288659794,
-          "retained_ratio": 0.8147890228586099,
-          "pre_refinement_fidelity": 0.911340206185567
+          "retained_ratio": 0.8147890228586099
         },
         "0.9": {
           "fidelity": 0.8824742268041237,
           "accuracy": 0.7072164948453609,
-          "retained_ratio": 0.9167108437449661,
-          "pre_refinement_fidelity": 0.8824742268041237
+          "retained_ratio": 0.9167108437449661
         }
       },
       "summary": {
@@ -196,7 +173,7 @@
   },
   "mutag": {
     "title": "Mutagenicity",
-    "model": "Teacher-free recursive CIDER",
+    "model": "Recursive CIDER",
     "checkpoint": "params/mutag/best.pt",
     "task_checkpoint": "params/mutag/task_model.pt",
     "seed": 0,
@@ -206,7 +183,6 @@
       "latent_channels": 16,
       "encoder_layers": 2,
       "decoder_channels": 64,
-      "task_context_channels": 0,
       "dropout": 0
     },
     "loss_weights": {
@@ -215,22 +191,18 @@
       "margin": 0.25,
       "step_consistency": 0.5,
       "counterfactual": 1,
-      "non_causal": 0,
       "kl": 0.00001,
       "independence": 0.01,
       "invariance": 0.01,
-      "entropy": 0.001,
-      "teacher": 0
+      "entropy": 0.001
     },
     "training_config": {
       "batch_size": 128,
       "learning_rate": 0.001,
       "ranking_temperature": 1,
-      "teacher_forcing_ratio": 0,
       "mask_temperature": 0.2,
       "sparse_focus": 2,
       "counterfactual_samples": 1,
-      "sample_latent": false,
       "supervision": "online_task_critic",
       "edge_policy_inputs": "cider_state_and_target"
     },
@@ -261,56 +233,47 @@
         "0.1": {
           "fidelity": 0.69,
           "accuracy": 0.67,
-          "retained_ratio": 0.1190925178527832,
-          "pre_refinement_fidelity": 0.69
+          "retained_ratio": 0.1190925178527832
         },
         "0.2": {
           "fidelity": 0.832,
           "accuracy": 0.752,
-          "retained_ratio": 0.21671083068847657,
-          "pre_refinement_fidelity": 0.832
+          "retained_ratio": 0.21671083068847657
         },
         "0.3": {
           "fidelity": 0.906,
           "accuracy": 0.774,
-          "retained_ratio": 0.3194277877807617,
-          "pre_refinement_fidelity": 0.906
+          "retained_ratio": 0.3194277877807617
         },
         "0.4": {
           "fidelity": 0.954,
           "accuracy": 0.786,
-          "retained_ratio": 0.41711221313476565,
-          "pre_refinement_fidelity": 0.954
+          "retained_ratio": 0.41711221313476565
         },
         "0.5": {
           "fidelity": 0.976,
           "accuracy": 0.78,
-          "retained_ratio": 0.510366683959961,
-          "pre_refinement_fidelity": 0.976
+          "retained_ratio": 0.510366683959961
         },
         "0.6": {
           "fidelity": 0.988,
           "accuracy": 0.788,
-          "retained_ratio": 0.6171226654052734,
-          "pre_refinement_fidelity": 0.988
+          "retained_ratio": 0.6171226654052734
         },
         "0.7": {
           "fidelity": 0.984,
           "accuracy": 0.796,
-          "retained_ratio": 0.7191890563964843,
-          "pre_refinement_fidelity": 0.984
+          "retained_ratio": 0.7191890563964843
         },
         "0.8": {
           "fidelity": 0.984,
           "accuracy": 0.796,
-          "retained_ratio": 0.8175240325927734,
-          "pre_refinement_fidelity": 0.984
+          "retained_ratio": 0.8175240325927734
         },
         "0.9": {
           "fidelity": 0.988,
           "accuracy": 0.8,
-          "retained_ratio": 0.9195243530273437,
-          "pre_refinement_fidelity": 0.988
+          "retained_ratio": 0.9195243530273437
         }
       },
       "summary": {
@@ -330,56 +293,47 @@
         "0.1": {
           "fidelity": 0.704,
           "accuracy": 0.678,
-          "retained_ratio": 0.1194666633605957,
-          "pre_refinement_fidelity": 0.704
+          "retained_ratio": 0.1194666633605957
         },
         "0.2": {
           "fidelity": 0.826,
           "accuracy": 0.708,
-          "retained_ratio": 0.21607905197143554,
-          "pre_refinement_fidelity": 0.826
+          "retained_ratio": 0.21607905197143554
         },
         "0.3": {
           "fidelity": 0.914,
           "accuracy": 0.752,
-          "retained_ratio": 0.31936341094970705,
-          "pre_refinement_fidelity": 0.914
+          "retained_ratio": 0.31936341094970705
         },
         "0.4": {
           "fidelity": 0.962,
           "accuracy": 0.764,
-          "retained_ratio": 0.4167291030883789,
-          "pre_refinement_fidelity": 0.962
+          "retained_ratio": 0.4167291030883789
         },
         "0.5": {
           "fidelity": 0.982,
           "accuracy": 0.756,
-          "retained_ratio": 0.5115961990356446,
-          "pre_refinement_fidelity": 0.982
+          "retained_ratio": 0.5115961990356446
         },
         "0.6": {
           "fidelity": 0.978,
           "accuracy": 0.76,
-          "retained_ratio": 0.6167646026611329,
-          "pre_refinement_fidelity": 0.978
+          "retained_ratio": 0.6167646026611329
         },
         "0.7": {
           "fidelity": 0.986,
           "accuracy": 0.764,
-          "retained_ratio": 0.719688720703125,
-          "pre_refinement_fidelity": 0.986
+          "retained_ratio": 0.719688720703125
         },
         "0.8": {
           "fidelity": 0.986,
           "accuracy": 0.76,
-          "retained_ratio": 0.8174146575927734,
-          "pre_refinement_fidelity": 0.986
+          "retained_ratio": 0.8174146575927734
         },
         "0.9": {
           "fidelity": 0.984,
           "accuracy": 0.762,
-          "retained_ratio": 0.9195854797363281,
-          "pre_refinement_fidelity": 0.984
+          "retained_ratio": 0.9195854797363281
         }
       },
       "summary": {

@@ -2,11 +2,10 @@
 
 ## Scope and baseline
 
-The bundled model is the formal teacher-free recursive CIDER. There is no
-`teacher_stage`, offline deletion search, teacher forcing, or edge-ranking
-pseudo-label dataset. Its frozen task classifier supplies differentiable
-prediction feedback and online same-budget alternatives. Both roles are needed;
-removing the classifier losses changes what the decomposition means.
+The model is recursive CIDER. Its frozen task classifier supplies differentiable
+prediction feedback and online same-budget comparisons during training. The
+learned edge policy estimates causal and non-causal distributions, removes a
+small edge subset, and re-encodes the residual graph at each round.
 
 Use gene correlation only for candidate topology. Do not train CIDER to copy
 correlation ranks as if they were causal labels. A classifier must actually use
@@ -41,10 +40,10 @@ trials from validation evidence. Record unsuccessful trials too. Do not expand
 compute indefinitely for a small validation gain; report what the budget tested.
 
 Keep ranking temperature 1, soft-mask temperature 0.2, sparse-stage focus 2, and
-one online alternative as the initial formal settings. Loss weights start at
+one online alternative as the initial settings. Loss weights start at
 fidelity 1, distillation 0.25, margin 0.25, step consistency 0.5, online
 counterfactual 1, KL 1e-5, independence 0.01, invariance 0.01, entropy 0.001.
-Changing a weight is a documented ablation, not a new external teacher.
+Record any loss-weight change as an ablation.
 
 The runner fixes task-checkpoint selection to validation macro-F1 and selects
 CIDER by `0.7 * mean fidelity + 0.3 * 10%-30% fidelity`. Always report retained

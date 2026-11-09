@@ -1,11 +1,11 @@
 # CIDER
 
-Research code for teacher-free recursive causal/non-causal graph decomposition.
+Research code for recursive causal/non-causal graph decomposition.
 Each round re-encodes the current residual graph and removes a small non-causal
 edge subset, producing nested explanations from 90% down to 10% retained edges.
-Training uses a frozen prediction model for feedback, without an offline
-deletion teacher, teacher forcing, or edge pseudo-labels. Given a target class,
-recursive edge selection makes no prediction-model calls.
+Training uses a frozen prediction model to assess whether each residual graph
+preserves the target prediction. Given a target class, recursive edge selection
+makes no prediction-model calls.
 
 Choose either the agent workflow for biological expression data or the Python
 workflow for direct use. Both use the same CIDER core. Source files are ordinary
@@ -93,7 +93,7 @@ explanations = model.explain_graph(graph)
 print(explanations["0.1"].edge_index)
 ```
 
-## Reproduce the archived experiments
+## Reproduce the experiments
 
 Five selected weight files and the original processed splits are included.
 From `cider_minimal/`, display the saved metrics or recompute them:
@@ -109,8 +109,8 @@ the included `../data`, CPU, batch size 128, and eight PyTorch threads.
 
 | Experiment | Method | Test metric | Result |
 | --- | --- | --- | ---: |
-| NCI1 | Teacher-free recursive CIDER | Mean prediction fidelity, 10%–90% retention | 87.40% |
-| Mutagenicity (`mutag`) | Teacher-free recursive CIDER | Mean prediction fidelity, 10%–90% retention | 92.47% |
+| NCI1 | Recursive CIDER | Mean prediction fidelity, 10%–90% retention | 87.40% |
+| Mutagenicity (`mutag`) | Recursive CIDER | Mean prediction fidelity, 10%–90% retention | 92.47% |
 | BA-2Motif | Supervised topology reference | Full-graph label accuracy | 100% |
 
 BA-2Motif uses known motif-edge labels and is a separate supervised reference.
@@ -122,3 +122,25 @@ The [Python guide](cider_minimal/README.md) records the model, losses, seeds,
 selected epochs, environment, and evaluation protocol. The
 [data notes](data/README.md) describe the frozen splits and NCI1 overlap removal.
 The code is released under the [MIT License](LICENSE).
+
+## Citation
+
+If you use CIDER in your research, please cite:
+
+Qibin Zhang, Chengshang Lyu, Lingxi Chen, Pei Chen, Rui Liu, and Luonan Chen
+(2026). **CIDER: Counterfactual-invariant diffusion-based GNN explainer for causal
+subgraph inference.** *The Innovation*, article 101607.
+[https://doi.org/10.1016/j.xinn.2026.101607](https://doi.org/10.1016/j.xinn.2026.101607)
+
+```bibtex
+@article{zhang2026cider,
+  title   = {{CIDER}: Counterfactual-invariant diffusion-based {GNN} explainer for causal subgraph inference},
+  author  = {Zhang, Qibin and Lyu, Chengshang and Chen, Lingxi and
+             Chen, Pei and Liu, Rui and Chen, Luonan},
+  journal = {The Innovation},
+  year    = {2026},
+  pages   = {101607},
+  doi     = {10.1016/j.xinn.2026.101607},
+  url     = {https://doi.org/10.1016/j.xinn.2026.101607}
+}
+```

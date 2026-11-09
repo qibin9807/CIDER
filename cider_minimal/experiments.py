@@ -111,7 +111,6 @@ def evaluate(model, graphs, batch_size=128):
             "fidelity": fidelity / count,
             "accuracy": accuracy / count,
             "retained_ratio": retained / count,
-            "pre_refinement_fidelity": fidelity / count,
         }
     return metrics
 
@@ -137,7 +136,7 @@ def fit_cider(
     validation_interval=5,
     checkpoint=None,
 ):
-    """Train without edge labels and restore the best validation checkpoint."""
+    """Train CIDER and restore the best validation checkpoint."""
     generator = torch.Generator().manual_seed(seed)
     loader = DataLoader(
         train_graphs,

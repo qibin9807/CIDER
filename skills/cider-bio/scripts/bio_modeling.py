@@ -158,9 +158,7 @@ def build_cider(task_model, cider_config, num_genes, num_classes):
     )
     weights = cider_config.get("loss_weights", {})
     if set(weights) - set(model.LOSS_WEIGHTS):
-        raise ValueError(
-            "loss_weights may only change the teacher-free CIDER loss terms."
-        )
+        raise ValueError("loss_weights may only change the supported CIDER loss terms.")
     model.LOSS_WEIGHTS = {**model.LOSS_WEIGHTS, **weights}
     return model
 

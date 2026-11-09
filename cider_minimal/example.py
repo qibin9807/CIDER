@@ -1,4 +1,4 @@
-"""Train and use teacher-free CIDER on a toy dataset or your own PyG graphs."""
+"""Train and use CIDER on a toy dataset or your own PyG graphs."""
 
 import argparse
 from copy import deepcopy
@@ -124,7 +124,6 @@ def main():
     torch.save(task_model.state_dict(), args.output_dir / "task_model.pt")
 
     # 3. CIDER freezes this classifier and learns from its prediction feedback.
-    # There is no teacher dataset or edge-label preprocessing.
     cider_config = {"hidden_channels": 48, "num_classes": task_config["label_dim"]}
     model = IterativeCIDER(task_config["input_dim"], task_model, **cider_config).to(
         device

@@ -1,4 +1,4 @@
-"""Teacher-free recursive CIDER: model, training objective, and graph explanation."""
+"""Recursive CIDER: model, training objective, and graph explanation."""
 
 from math import ceil
 
